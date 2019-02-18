@@ -1,4 +1,4 @@
-var disneyData = [
+var deaths = [
     // { title: "Snow White and the Seven Dwarfs", deaths: 1, year: 1937},
     // { title: "Fantasia", deaths: 4, year: 1940 },
     { title: "Pinocchio", deaths: 83, year: 1940 },
@@ -38,94 +38,104 @@ var disneyData = [
   ];
 
 
-// 2. Use the margin convention practice 
-var margin = { top: 50, right: 50, bottom: 50, left: 50 }
-    , width = window.innerWidth - margin.left - margin.right // Use the window's width 
-    , height = window.innerHeight - margin.top - margin.bottom; // Use the window's height
-
-// The number of datapoints
-var n = 35;
-
-// 5. X scale will use the index of our data
-var xScale = d3.scaleLinear()
-    // .domain([0, n]) // input // this sets the range of numbers of the x axis
-    .domain([1940, 2018])
-    .range([0, width]); // output
-
-// 6. Y scale will use the randomly generate number 
-var yScale = d3.scaleLinear()
-    .domain([0, 1800]) // input // this sets the range of the numbers on the y axis
-    .range([height, 0]); // output 
-
-// 7. d3's line generator
-var line = d3.line()
-    // .x(function (d, i) { return xScale(i); }) // set the x values for the line generator
-    .x(function (d) { return xScale(d.x); }) // uses the x property to set the x values of the line
-    .y(function (d) { return yScale(d.y); }) // set the y values for the line generator 
-    .curve(d3.curveMonotoneX) // apply smoothing to the line
-
-// 8. An array of objects of length N. Each object has key -> value pair, the key being "y" and the value is a random number
-// var dataset = d3.range(n).map(function (d) {
-//     // console.log(d);
-//     return {
-//         "x": d,
-//         // "y": d
-//         // "y": d3.randomUniform(1, 20)()
-//         "y": Math.floor(Math.random() * 20)
-//     }
-// })
-// console.log(dataset);
-
-
-// parse the data from the disney array and set as the dataset to be used
-var dataset = disneyData.map(function (d) {
-    // console.log(d);
-    return {
-        "x": d.year,
-        "y": d.deaths
-    }
-});
-console.log(dataset);
-
-// 1. Add the SVG to the page and employ #2
-var svg = d3.select(".chart").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-// 3. Call the x axis in a group tag
-svg.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(xScale)); // Create an axis component with d3.axisBottom
-
-// 4. Call the y axis in a group tag
-svg.append("g")
-    .attr("class", "y axis")
-    .call(d3.axisLeft(yScale)); // Create an axis component with d3.axisLeft
-
-// 9. Append the path, bind the data, and call the line generator 
-svg.append("path")
-    .datum(dataset) // 10. Binds data to the line 
-    .attr("fill", "none")
-    .attr("stroke", "black")
-    .attr("stroke-linejoin", "round")
-    .attr("stroke-linecap", "round")
-    .attr("stroke-width", 3)
-    .attr("class", "line") // Assign a class for styling 
-    .attr("d", line); // 11. Calls the line generator 
-
-// 12. Appends a circle for each datapoint 
-svg.selectAll(".dot")
-    .data(dataset)
-    .enter().append("circle") // Uses the enter().append() method
-    .attr("class", "dot") // Assign a class for styling
-    // .attr("cx", function (d, i) { return xScale(i) })
-    .attr("cx", function (d) { return xScale(d.x) })
-    .attr("cy", function (d) { return yScale(d.y) })
-    .attr("r", 5)
-    .on("mouseover", function () {
-        console.log(this)
-    })
-    .on("mouseout", function () { })
+  var counter = 0;
+  var deathNum;
+  var userScore = 0;
+  
+  
+  /* FUNCTIONS FOR GAME LOGIC */
+  
+  function generateButtons() {
+  
+      $("#userScore").append(userScore);
+      var currentCount = deathCounter(counter);
+      $("#numDeaths").append(currentCount);
+  
+      // empty the div
+      $("#filmButtons").empty();
+      // console.log("function running");
+      // creates the buttons based on the deaths array
+      for (var i = 0; i < deaths.length; i++) {
+          var btn = $("<button>");
+          btn.text(deaths[i].title);
+          btn.addClass("btn btn-dark filmTitleButton");
+          btn.attr("data-title", deaths[i].title);
+          btn.attr("status", "not clicked");
+          $("#filmButtons").append(btn);
+      } // end for loop
+  
+  }// end generateButtons function
+  
+  function deathCounter(counter) {
+      const deaths = [81, 83, 83, 108, 261, 304, 1017, 1468, 1660]
+      console.log("death counter: " + counter);
+      return deaths[counter];
+  
+  } // end deathCounter function
+  
+  function buttonClicked() {
+  
+      console.log("CURRENT COUNTER: "+counter);
+  
+      var title = $(this).data("title");
+      var status = $(this).attr("status");
+  
+      var currentNumDeaths = deathCounter(counter);
+      var correct = checkAnswer(title);
+  
+      $("#numDeaths").empty();
+      $("#numDeaths").append(currentNumDeaths);
+  
+  
+      console.log("Correct # of Deaths: "+currentNumDeaths + "\n Selected Film Deaths: "+ correct);
+  
+  
+      if (status == "not clicked") {
+          if (currentNumDeaths == correct) {
+              console.log("CORRECT!");
+              userScore++;
+              $("#userScore").text(userScore);
+              counter++;
+              if (counter ==9){
+                  currentNumDeaths = "GAME OVER!";
+                  $("#numDeaths").empty();
+                  $("#numDeaths").text(currentNumDeaths);
+              }
+              else {
+                  currentNumDeaths = deathCounter(counter);        
+                  $("#numDeaths").empty();
+                  $("#numDeaths").append(currentNumDeaths);
+              }
+              $(this).addClass("disabled");
+              $(this).attr("status", "clicked");
+          }
+          else {
+              console.log("INCORRECT!");
+              userScore--;
+              $("#userScore").text(userScore);
+          }
+      }
+      else {
+          return;
+      }
+  
+  
+  
+  
+  }  // end buttonClicked function
+  
+  
+  function checkAnswer(title) {
+      // create variables
+      var death;
+      deaths.forEach(element => {
+          if (element.title == title){
+              death = element.deaths;
+          }
+      })
+      return death;
+  } // end checkAnswer
+  
+  generateButtons();
+  
+  $(document).on("click", ".filmTitleButton", buttonClicked);

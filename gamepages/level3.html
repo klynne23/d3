@@ -14,26 +14,54 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="./gamecode/l3style.css">
+    <!-- jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="./gamecode/l1style.css">
 </head>
 
 <body>
 
-    <h1 id="l3title">LEVEL 3</h1>
-    <p id="l3subtitle">DEATH COUNTS OVER 1000! </p>
+    <h1 id="l1title">LEVEL 2</h1>
+    <p id="l1subtitle">DEATH COUNTS BETWEEN 50 AND 2000! </p>
+
+    <div class="container scores">
+        <div class="row text-center">
+            <div class="col-md-2"></div>
+            <div class="col-md-3 userSection">
+                <h3>Your Score</h3>
+                <h1 id="userScore"></h1>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-3 deathSection">
+                <h3>Click on films that have # of deaths</h3>
+                <h1 id="numDeaths"></h1>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+        <div class="row text-center">
+            <!-- <div class="col-md-1"></div> -->
+            <div class="col-md-12" id="filmButtons"></div>
+            <!-- <div class="col-md-1"></div> -->
+        </div>
+    </div>
 
     <div class="chart"></div>
 
     <div class="container buttonsContainer">
-            <div class="row" id="gameButtons">
-                <div class="col col-md-3"></div>
-                <div class="col col-md-6 text-center">
-                    <a class="btn btn-lg level1" href="../index.html" role="button">Home ⇢</a>
-                </div>
-                <div class="col col-md-3"></div>
-            </div> <!-- end gameButtons row -->
-        </div> <!-- end buttonsContainer  -->
-    
+        <div class="row" id="gameButtons">
+            <div class="col col-md-3"></div>
+            <div class="col col-md-6 text-center">
+                <a class="btn btn-lg level1" href="../index.html" role="button">Next Level ⇢</a>
+            </div>
+            <div class="col col-md-3"></div>
+        </div> <!-- end gameButtons row -->
+    </div> <!-- end buttonsContainer  -->
 
 
 
