@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Bungee|Bungee+Hairline|Chewy|Germania+One|Luckiest+Guy|Megrim|Nixie+One|Pangolin|Patrick+Hand|Rock+Salt');
+
+body {
+    background-image: url("../../images/bg1.png");
+    background-size: cover;
+}
+
+/* graph styling */
+
+.chart {
+    background-color: rgba(255, 255, 255, 0.89);
+}
+
+.dot {
+    fill: #00c3ff;
+}
+.line {
+    stroke: black;
+}
+
+
+/* LEVEL ONE STYLING */
+
+
+#l1title {
+    color: red;
+    font-family: 'Germania One';
+    font-size: 8em;
+    text-align: center;
+    margin-bottom: 0;
+    /* margin-top: 2%; */
+    text-shadow: 1px 1px 15px rgb(0, 0, 0), -1px -1px 15px rgb(0, 0, 0);
+    /* animation: color 3s infinite; */
+}
+
+#l1subtitle {
+    text-align: center;
+    font-family: "Rock Salt";
+    letter-spacing: 1px;
+    font-size: 1em;
+    color: white;
+    text-shadow: 1px 1px 3px black;
+}
+
+.userSection {
+    padding-top: 1%;
+    color: white;
+    background-color: black;
+}
+
+.deathSection {
+    padding-top: 1%;
+    color: white;
+    background-color: black;
+}
+
+.btn {
+    margin: 1%;
+    box-shadow: 0px 0px 10px black;
+    font-family: "Megrim";  
+}
+
+.btn.level1 {
+    background-color: #ffffff;
+    color: green;
+    transition: .5s;
+}
+
+.btn.level1:hover {
+    background-color: green;
+    color: white;
+}

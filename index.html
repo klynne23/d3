@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>D3 DISNEY GAME</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <h1 id="title">&#9760; DISNEY DEATHS &#9760;</h1>
+
+    <p id="subtitle">Test your knowledge of character deaths from your favorite childhood films! </p>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6 text-center instructions">
+                <h3>How To Play</h3>
+                <div class="instructionsDiv">
+                    <p>1. Study the line chart for help with guesses</p>
+                    <p>2. Correct guesses increase your score while every incorrect guess will decrease it</p>
+                </div>
+
+                <h3>Levels</h3>
+                <div class="instructionsDiv">
+                    <p><span id="l1">Level 1: </span> Death Count between 1 & 100</p>
+                    <p><span id="l2">Level 2: </span> Death Count between 100 & 1000</p>
+                    <p><span id="l3">Level 3: </span> Death Count over 1000</p>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div> <!-- end row -->
+    </div> <!-- end instructions -->
+
+    <div class="container buttonsContainer">
+        <div class="row" id="gameButtons">
+            <div class="col col-md-3"></div>
+            <div class="col col-md-6 text-center">
+                <a class="btn btn-lg level1" href="./gamepages/level1.html" role="button">One ⇢</a>
+                <a class="btn btn-lg level2" href="./gamepages/level2.html" role="button">Two ⇢</a>
+                <a class="btn btn-lg level3" href="./gamepages/level3.html" role="button">Three ⇢</a>
+            </div>
+            <div class="col col-md-3"></div>
+        </div> <!-- end gameButtons row -->
+    </div> <!-- end buttonsContainer  -->
+
+
+    <div class="chart"></div>
+
+
+
+</body>
+
+<!-- always put script tags at the bottom of the body tags because otherwise
+the DOM will try to execute code in the code.js file before it has read the code
+inside of the body tags thus why it will not work -->
+<script type="text/javascript" src="./d3/d3.min.js"></script>
+
+<!-- additionally make sure to put the d3 source code link above the written code
+so that it will execute last -->
+<script src="code.js"></script>
+
+
+
+
+
+</html>
